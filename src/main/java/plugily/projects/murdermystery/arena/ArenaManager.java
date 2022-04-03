@@ -281,8 +281,12 @@ public class ArenaManager {
 
     if(arena.getArenaState() == ArenaState.IN_GAME) {
       if(Role.isRole(Role.FAKE_DETECTIVE, player, arena) || Role.isRole(Role.INNOCENT, player, arena)) {
-        user.setStat(StatsStorage.StatisticType.CONTRIBUTION_MURDERER, ThreadLocalRandom.current().nextInt(4) + 1);
-        user.setStat(StatsStorage.StatisticType.CONTRIBUTION_DETECTIVE, ThreadLocalRandom.current().nextInt(4) + 1);
+        user.setStat(StatsStorage.StatisticType.CONTRIBUTION_MURDERER, ThreadLocalRandom.current().nextInt(24) + 1);
+        user.setStat(StatsStorage.StatisticType.CONTRIBUTION_DETECTIVE, ThreadLocalRandom.current().nextInt(24) + 1);
+      } else if(Role.isRole(Role.DETECTIVE, player, arena)){
+        user.setStat(StatsStorage.StatisticType.CONTRIBUTION_MURDERER, ThreadLocalRandom.current().nextInt(24) + 1);
+      } else if(Role.isRole(Role.MURDERER, player, arena)){
+        user.setStat(StatsStorage.StatisticType.CONTRIBUTION_DETECTIVE, ThreadLocalRandom.current().nextInt(24) + 1);
       }
     }
 
@@ -437,8 +441,12 @@ public class ArenaManager {
 
         if(!hasDeathRole && !Role.isRole(Role.SPECTATOR, player, arena)) {
           if(Role.isRole(Role.FAKE_DETECTIVE, player, arena) || Role.isRole(Role.INNOCENT, player, arena)) {
-            user.setStat(StatsStorage.StatisticType.CONTRIBUTION_MURDERER, ThreadLocalRandom.current().nextInt(4) + 1);
-            user.setStat(StatsStorage.StatisticType.CONTRIBUTION_DETECTIVE, ThreadLocalRandom.current().nextInt(4) + 1);
+            user.setStat(StatsStorage.StatisticType.CONTRIBUTION_MURDERER, ThreadLocalRandom.current().nextInt(24) + 1);
+            user.setStat(StatsStorage.StatisticType.CONTRIBUTION_DETECTIVE, ThreadLocalRandom.current().nextInt(24) + 1);
+          }else if(Role.isRole(Role.DETECTIVE, player, arena)){
+            user.setStat(StatsStorage.StatisticType.CONTRIBUTION_MURDERER, ThreadLocalRandom.current().nextInt(24) + 1);
+          } else if(Role.isRole(Role.MURDERER, player, arena)){
+            user.setStat(StatsStorage.StatisticType.CONTRIBUTION_DETECTIVE, ThreadLocalRandom.current().nextInt(24) + 1);
           }
 
           boolean hasMurdererRole = Role.isRole(Role.MURDERER, player, arena);
