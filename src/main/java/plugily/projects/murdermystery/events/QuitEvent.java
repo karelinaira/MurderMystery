@@ -58,6 +58,8 @@ public class QuitEvent implements Listener {
       ArenaManager.leaveAttempt(player, arena);
     }
     plugin.getUserManager().removeUser(plugin.getUserManager().getUser(player));
+
+    plugin.getWaitingRoom().removePlayerFromWaitingRoom(player);
   }
 
 }

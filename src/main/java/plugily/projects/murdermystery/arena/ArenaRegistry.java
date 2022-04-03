@@ -50,6 +50,9 @@ public class ArenaRegistry {
   public static boolean isInArena(Player player) {
     return getArena(player) != null;
   }
+  public static boolean isInArenaOrWaitingRoom(Player player) {
+    return isInArena(player) || plugin.getWaitingRoom().isInWaitingRoom(player);
+  }
 
   /**
    * Returns arena where the player is

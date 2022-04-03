@@ -80,6 +80,8 @@ public class JoinEvent implements Listener {
     if(plugin.getConfigPreferences().getOption(ConfigPreferences.Option.INVENTORY_MANAGER_ENABLED)) {
       InventorySerializer.loadInventory(plugin, event.getPlayer());
     }
+
+    plugin.getWaitingRoom().addPlayerToWaitingRoom(event.getPlayer());
   }
 
   @EventHandler

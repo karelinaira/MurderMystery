@@ -88,7 +88,7 @@ public class Events implements Listener {
 
   @EventHandler
   public void onDrop(PlayerDropItemEvent event) {
-    if(ArenaRegistry.isInArena(event.getPlayer())) {
+    if(ArenaRegistry.isInArenaOrWaitingRoom (event.getPlayer())) {
       event.setCancelled(true);
     }
   }
@@ -289,7 +289,7 @@ public class Events implements Listener {
 
   @EventHandler(priority = EventPriority.HIGH)
   public void onFoodLevelChange(FoodLevelChangeEvent event) {
-    if(event.getEntity().getType() == EntityType.PLAYER && ArenaRegistry.isInArena((Player) event.getEntity())) {
+    if(event.getEntity().getType() == EntityType.PLAYER && ArenaRegistry.isInArenaOrWaitingRoom((Player) event.getEntity())) {
       event.setFoodLevel(20);
       event.setCancelled(true);
     }
@@ -298,7 +298,7 @@ public class Events implements Listener {
   @EventHandler(priority = EventPriority.HIGH)
   //highest priority to fully protect our game
   public void onBlockBreakEvent(BlockBreakEvent event) {
-    if(ArenaRegistry.isInArena(event.getPlayer())) {
+    if(ArenaRegistry.isInArenaOrWaitingRoom(event.getPlayer())) {
       event.setCancelled(true);
       return;
     }
@@ -319,7 +319,7 @@ public class Events implements Listener {
   @EventHandler(priority = EventPriority.HIGH)
   //highest priority to fully protect our game
   public void onBuild(BlockPlaceEvent event) {
-    if(ArenaRegistry.isInArena(event.getPlayer())) {
+    if(ArenaRegistry.isInArenaOrWaitingRoom(event.getPlayer())) {
       event.setCancelled(true);
     }
   }
@@ -328,7 +328,7 @@ public class Events implements Listener {
   //highest priority to fully protect our game
   public void onHangingBreakEvent(HangingBreakByEntityEvent event) {
     if(event.getEntity() instanceof ItemFrame || event.getEntity() instanceof Painting) {
-      if(event.getRemover() instanceof Player && ArenaRegistry.isInArena((Player) event.getRemover())) {
+      if(event.getRemover() instanceof Player && ArenaRegistry.isInArenaOrWaitingRoom((Player) event.getRemover())) {
         event.setCancelled(true);
         return;
       }
@@ -336,7 +336,7 @@ public class Events implements Listener {
         return;
       }
       Arrow arrow = (Arrow) event.getRemover();
-      if(arrow.getShooter() instanceof Player && ArenaRegistry.isInArena((Player) arrow.getShooter())) {
+      if(arrow.getShooter() instanceof Player && ArenaRegistry.isInArenaOrWaitingRoom((Player) arrow.getShooter())) {
         event.setCancelled(true);
       }
     }
@@ -351,22 +351,22 @@ public class Events implements Listener {
     if(livingEntity.getType() != EntityType.ARMOR_STAND) {
       return;
     }
-    if((e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof Player && ArenaRegistry.isInArena((Player) ((Arrow) e.getDamager()).getShooter()))
-        || (e.getDamager() instanceof Player && ArenaRegistry.isInArena((Player) e.getDamager()))) {
+    if((e.getDamager() instanceof Arrow && ((Arrow) e.getDamager()).getShooter() instanceof Player && ArenaRegistry.isInArenaOrWaitingRoom((Player) ((Arrow) e.getDamager()).getShooter()))
+        || (e.getDamager() instanceof Player && ArenaRegistry.isInArenaOrWaitingRoom((Player) e.getDamager()))) {
       e.setCancelled(true);
     }
   }
 
   @EventHandler(priority = EventPriority.HIGH)
   public void onInteractWithArmorStand(PlayerArmorStandManipulateEvent event) {
-    if(ArenaRegistry.isInArena(event.getPlayer())) {
+    if(ArenaRegistry.isInArenaOrWaitingRoom(event.getPlayer())) {
       event.setCancelled(true);
     }
   }
 
   @EventHandler
   public void onCraft(PlayerInteractEvent event) {
-    if(!ArenaRegistry.isInArena(event.getPlayer())) {
+    if(!ArenaRegistry.isInArenaOrWaitingRoom(event.getPlayer())) {
       return;
     }
     if(event.getPlayer().getTargetBlock(null, 7).getType() == XMaterial.CRAFTING_TABLE.parseMaterial()) {

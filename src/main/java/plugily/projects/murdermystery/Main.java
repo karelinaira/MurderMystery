@@ -38,12 +38,14 @@ import plugily.projects.murdermystery.arena.Arena;
 import plugily.projects.murdermystery.arena.ArenaEvents;
 import plugily.projects.murdermystery.arena.ArenaRegistry;
 import plugily.projects.murdermystery.arena.ArenaUtils;
+import plugily.projects.murdermystery.arena.WaitingRoom;
 import plugily.projects.murdermystery.arena.special.SpecialBlockEvents;
 import plugily.projects.murdermystery.arena.special.mysterypotion.MysteryPotionRegistry;
 import plugily.projects.murdermystery.arena.special.pray.PrayerRegistry;
 import plugily.projects.murdermystery.commands.arguments.ArgumentsRegistry;
 import plugily.projects.murdermystery.events.ChatEvents;
 import plugily.projects.murdermystery.events.Events;
+import plugily.projects.murdermystery.events.InventoryEvent;
 import plugily.projects.murdermystery.events.JoinEvent;
 import plugily.projects.murdermystery.events.LobbyEvent;
 import plugily.projects.murdermystery.events.QuitEvent;
@@ -100,6 +102,7 @@ public class Main extends JavaPlugin {
   private LastWordsManager lastWordsManager;
   private TrailsManager trailsManager;
   private SpecialItemManager specialItemManager;
+  private WaitingRoom waitingRoom;
 
   @Override
   public void onEnable() {
@@ -228,6 +231,8 @@ public class Main extends JavaPlugin {
     new Events(this);
     new LobbyEvent(this);
     new SpectatorItemEvents(this);
+    waitingRoom = new WaitingRoom(this);
+    new InventoryEvent(this);
     rewardsHandler = new RewardsFactory(this);
     specialItemManager = new SpecialItemManager(this);
     corpseHandler = new CorpseHandler(this);
@@ -380,5 +385,7 @@ public class Main extends JavaPlugin {
     }
   }
 
-
+  public WaitingRoom getWaitingRoom() {
+    return waitingRoom;
+  }
 }
