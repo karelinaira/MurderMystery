@@ -131,15 +131,15 @@ public class WaitingRoom  extends BukkitRunnable {
     if(state == WaitingRoomState.WAITING && players.isEmpty()) {
       return;
     }
-
-    plugin.getLogger().log(Level.WARNING, " ======================================= ");
-
-    for (Player player : plugin.getWaitingRoom().getPlayers()) {
-      plugin.getLogger().log(Level.SEVERE, "player : " + player.identity().uuid().toString());
-    }
-    for (Map.Entry<String, Integer> entry : plugin.getWaitingRoom().getArenasVoices().entrySet()) {
-      plugin.getLogger().log(Level.SEVERE, "voices : " + entry.getKey().toString() + " : " + entry.getValue());
-    }
+//
+//    plugin.getLogger().log(Level.WARNING, " ======================================= ");
+//
+//    for (Player player : plugin.getWaitingRoom().getPlayers()) {
+//      plugin.getLogger().log(Level.SEVERE, "player : " + player.identity().uuid().toString());
+//    }
+//    for (Map.Entry<String, Integer> entry : plugin.getWaitingRoom().getArenasVoices().entrySet()) {
+//      plugin.getLogger().log(Level.SEVERE, "voices : " + entry.getKey().toString() + " : " + entry.getValue());
+//    }
 
     switch (state) {
       case WAITING:
@@ -176,15 +176,12 @@ public class WaitingRoom  extends BukkitRunnable {
           System.out.println(arena.getMapName());
 
           for (Player player : new ArrayList<>(players)) {
-//            player.getInventory().clear();
-//            arena.teleportToStartLocation(player);
             player.getInventory().clear();
             ArenaManager.joinAttempt(player, arena);
             // TODO
             removePlayerFromWaitingRoom(player);
           }
           arena.setForceStart(true);
-//          arena.setArenaState(ArenaState.STARTING);
           setState(WaitingRoomState.WAITING);
 
           break;
