@@ -72,6 +72,10 @@ public class PlaceholderManager extends PlaceholderExpansion {
         return Integer.toString(StatsStorage.getUserStats(player, StatsStorage.StatisticType.LOSES));
       case "arena_players_online":
         return Integer.toString(ArenaRegistry.getArenaPlayersOnline());
+      case "murder_times":
+        return Integer.toString(StatsStorage.getUserStats(player, StatsStorage.StatisticType.MURDER_TIMES));
+      case "detective_times":
+        return Integer.toString(StatsStorage.getUserStats(player, StatsStorage.StatisticType.DETECTIVE_TIMES));
       default:
         return handleArenaPlaceholderRequest(id);
     }
