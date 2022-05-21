@@ -879,8 +879,6 @@ public class Arena extends BukkitRunnable {
   }
 
   public void teleportToStartLocation(Player player) {
-    plugin.getWaitingRoom().removePlayerFromWaitingRoom(player);
-
     int size = playerSpawnPoints.size();
     player.teleport(playerSpawnPoints.get(size == 1 ? 0 : random.nextInt(size)));
   }
